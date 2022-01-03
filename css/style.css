@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+html, body{
+    height: 100%;
+    background-color: #f0f0f0;
+}
+
+section{
+    min-height: 100%;
+}
+
+header{
+    background-color: #dedede;
+    padding: 30px 45px;
+}
+
+a{
+    color: #666;
+    text-decoration: none;
+}
+
+article{
+    padding-bottom: 72px;
+}
+
+ul{
+    margin: 30px auto 0;
+    background-color: #dedede;
+    padding: 30px 45px 30px 60px;
+    border-radius: 8px;
+}
+
+li{
+    line-height: 1.7;
+}
+
+footer{
+    margin-top: -72px;
+    background-color: #dedede;
+    padding: 30px 45px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+}
