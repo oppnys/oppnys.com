@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线编辑器</title>
+</head>
+<body>
+<div>
+    <button id="selector">选择项目</button>
+</div>
+<script>
+    const selector = document.getElementById('selector');
+    selector.onclick = async ()=>{
+        if(window.showDirectoryPicker){
+           try {
+               const handle = await window.showDirectoryPicker()
+               const root = await processHandle(handle)
+               const ul = renderTree([root])
+               document.body.append(ul)
+           }catch (e) {
+               console.log(e)
+           }
+        }
+    }
+    function renderTree(roots){
+        if (!roots) return
+        const ul = document.createElement('ul');
+        for (const item of roots) {
+            const li = document.createElement('li');
+            li.innerText = item.name
+            const cUl = renderTree(item.children)
+            if (cUl) li.append(cUl)
+            ul.appendChild(li)
+        }
+        return ul
+    }
+    async function processHandle(handle){
+        if(handle.kind === 'file'){
+           return handle
+        }
+        handle.children = [];
+        const iter = handle.entries();
+        for await(const item of iter) {
+            handle.children.push(await processHandle(item[1]))
+        }
+        return handle
+    }
+</script>
+</body>
+</html>
